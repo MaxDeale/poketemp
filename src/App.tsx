@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Pokemon, PokemonType, Ability } from './types/types'
 import AvailablePokemon from './pokemon/AvailablePokemon';
+import Register from './auth/Register'
+import { getAuth } from 'firebase/auth';
 
 import './main.css';
 
 function App() {
-  const [availablePokemons, setAvailablePokemons] = useState<Pokemon[]>([])
+
+  const auth = getAuth();
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [user, setUser] = useState<string>('');
+  const [availablePokemons, setAvailablePokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     //This is where we will fetch the available pokemon 
@@ -63,6 +70,12 @@ function App() {
 
   return (
     <div className="App">
+      <Register
+        auth={auth}
+        setIsLoggedIn={setIsLoggedIn}
+        setIsRegistered={setIsRegistered}
+        setUser={setUser}
+      />
       <AvailablePokemon pokemons={availablePokemons} />
     </div>
   );

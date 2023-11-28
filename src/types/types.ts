@@ -1,5 +1,17 @@
+import { Auth } from "firebase/auth"
+
 export { };
 
+
+//AUTHENTICATION 
+export interface AuthProps {
+    auth: Auth;
+    setIsRegistered: (isRegistered: boolean) => void;
+    setIsLoggedIn: (setIsLoggedIn: boolean) => void;
+    setUser: (user: string) => void;
+}
+
+//POKEMON
 export interface Ability {
     ability: {
         name: string;
